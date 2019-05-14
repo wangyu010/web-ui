@@ -1,0 +1,253 @@
+   0.0 TEL | Telepresence 0.93-7-gdd1aa85-dirty launched at Mon Feb 25 17:59:19 2019
+   0.0 TEL |   /usr/local/bin/telepresence --swap-deployment web-ui --docker-run --rm -it -v /home/xvan/workspace/ein_ui/hangxin-web-ui5:/lain/app -e WEB_SUGGEST_BACKEND_HOST=economist web-ui:base ./deploy/run.sh
+   0.0 TEL |   Using images version 0.93 (dev)
+   0.0 TEL | Platform: linux
+   0.0 TEL | Python 3.6.6 (default, Sep 12 2018, 18:26:19)
+   0.0 TEL | [GCC 8.0.1 20180414 (experimental) [trunk revision 259383]]
+   0.0 TEL | [1] Running: uname -a
+   0.0   1 | Linux ubuntu 4.15.0-20-generic #21-Ubuntu SMP Tue Apr 24 06:16:15 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+   0.0 TEL | BEGIN SPAN main.py:41(main)
+   0.0 TEL | BEGIN SPAN startup.py:58(__init__)
+   0.0 TEL | [2] Capturing: kubectl version --short
+   0.1 TEL | [3] Capturing: kubectl config current-context
+   0.2 TEL | [4] Capturing: kubectl config view -o json
+   0.2 TEL | [5] Capturing: kubectl get ns ein-dev
+   0.3 TEL | Command: kubectl 1.12.1
+   0.3 TEL | Context: kubernetes-admin@kubernetes, namespace: ein-dev, version: 1.12.1
+   0.3 TEL | END SPAN startup.py:58(__init__)    0.3s
+   0.3 TEL | [6] Capturing: ssh -V
+   0.3 TEL | [7] Running: sudo -n echo -n
+   0.3 >>> | Volumes are rooted at $TELEPRESENCE_ROOT. See https://telepresence.io/howto/volumes.html for details.
+   0.3 TEL | [8] Capturing: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pods telepresence-connectivity-check --ignore-not-found
+   4.1 TEL | Scout info: {'latest_version': '0.97', 'application': 'telepresence', 'notices': []}
+   4.1 TEL | BEGIN SPAN deployment.py:120(supplant_deployment)
+   4.1 TEL | BEGIN SPAN remote.py:73(get_deployment_json)
+   4.1 TEL | [9] Capturing: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get deployment -o json --export web-ui
+   4.2 TEL | END SPAN remote.py:73(get_deployment_json)    0.2s
+   4.2 TEL | [10] Running: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev delete deployment web-ui-48c6652095fb485cbd6dbee14b7e16f6 --ignore-not-found
+   4.4 TEL | [11] Running: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev apply -f -
+   4.6  11 | deployment.extensions/web-ui-48c6652095fb485cbd6dbee14b7e16f6 created
+   4.6 TEL | [12] Running: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev scale deployment web-ui --replicas=0
+   5.0  12 | deployment.extensions/web-ui scaled
+   5.0 TEL | END SPAN deployment.py:120(supplant_deployment)    1.0s
+   5.0 TEL | BEGIN SPAN remote.py:149(get_remote_info)
+   5.0 TEL | BEGIN SPAN remote.py:73(get_deployment_json)
+   5.0 TEL | [13] Capturing: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get deployment -o json --export --selector=telepresence=48c6652095fb485cbd6dbee14b7e16f6
+   5.1 TEL | END SPAN remote.py:73(get_deployment_json)    0.1s
+   5.1 TEL | Searching for Telepresence pod:
+   5.1 TEL |   with name web-ui-48c6652095fb485cbd6dbee14b7e16f6-*
+   5.1 TEL |   with labels {'app': 'web-ui', 'telepresence': '48c6652095fb485cbd6dbee14b7e16f6', 'tier': 'web'}
+   5.1 TEL | [14] Capturing: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pod -o json --export --selector=telepresence=48c6652095fb485cbd6dbee14b7e16f6
+   5.4 TEL | Checking web-ui-48c6652095fb485cbd6dbee14b7e16f6-7b564976d-gkxnp
+   5.4 TEL | Looks like we've found our pod!
+   5.4 TEL | BEGIN SPAN remote.py:111(wait_for_pod)
+   5.4 TEL | [15] Capturing: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pod web-ui-48c6652095fb485cbd6dbee14b7e16f6-7b564976d-gkxnp -o json
+   6.0 TEL | [16] Capturing: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pod web-ui-48c6652095fb485cbd6dbee14b7e16f6-7b564976d-gkxnp -o json
+   6.4 TEL | [17] Capturing: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pod web-ui-48c6652095fb485cbd6dbee14b7e16f6-7b564976d-gkxnp -o json
+   6.8 TEL | [18] Capturing: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pod web-ui-48c6652095fb485cbd6dbee14b7e16f6-7b564976d-gkxnp -o json
+   7.3 TEL | [19] Capturing: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pod web-ui-48c6652095fb485cbd6dbee14b7e16f6-7b564976d-gkxnp -o json
+   7.4 TEL | END SPAN remote.py:111(wait_for_pod)    2.0s
+   7.4 TEL | END SPAN remote.py:149(get_remote_info)    2.4s
+   7.4 TEL | BEGIN SPAN __init__.py:38(connect)
+   7.4 TEL | [20] Launching kubectl logs: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev logs -f web-ui-48c6652095fb485cbd6dbee14b7e16f6-7b564976d-gkxnp --container web
+   7.4 TEL | [21] Launching kubectl port-forward: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev port-forward web-ui-48c6652095fb485cbd6dbee14b7e16f6-7b564976d-gkxnp 38049:8022
+   7.4 TEL | [22] Capturing: ip addr show dev docker0
+   7.4 TEL | [23] Launching socat for docker: socat TCP4-LISTEN:38049,bind=172.17.0.1,reuseaddr,fork TCP4:127.0.0.1:38049
+   7.5 TEL | [24] Running: ssh -F /dev/null -q -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -p 38049 telepresence@localhost /bin/true
+   7.5 TEL | [24] exit 255 in 0.01 secs.
+   7.6  20 | Listening...
+   7.6  20 | 2019-02-25T09:59:25+0000 [-] Loading ./forwarder.py...
+   7.6  20 | 2019-02-25T09:59:26+0000 [-] /etc/resolv.conf changed, reparsing
+   7.6  20 | 2019-02-25T09:59:26+0000 [-] Resolver added ('10.96.0.10', 53) to server list
+   7.6  20 | 2019-02-25T09:59:26+0000 [-] SOCKSv5Factory starting on 9050
+   7.6  20 | 2019-02-25T09:59:26+0000 [socks.SOCKSv5Factory#info] Starting factory <socks.SOCKSv5Factory object at 0x7f06ee20f6d8>
+   7.6  20 | 2019-02-25T09:59:26+0000 [-] DNSDatagramProtocol starting on 9053
+   7.6  20 | 2019-02-25T09:59:26+0000 [-] Starting protocol <twisted.names.dns.DNSDatagramProtocol object at 0x7f06ee20fa90>
+   7.6  20 | 2019-02-25T09:59:26+0000 [-] Loaded.
+   7.6  20 | 2019-02-25T09:59:26+0000 [twisted.scripts._twistd_unix.UnixAppLogger#info] twistd 18.7.0 (/usr/bin/python3.6 3.6.5) starting up.
+   7.6  20 | 2019-02-25T09:59:26+0000 [twisted.scripts._twistd_unix.UnixAppLogger#info] reactor class: twisted.internet.epollreactor.EPollReactor.
+   7.7  21 | Forwarding from 127.0.0.1:38049 -> 8022
+   7.7  21 | Forwarding from [::1]:38049 -> 8022
+   7.7 TEL | [25] Running: ssh -F /dev/null -q -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -p 38049 telepresence@localhost /bin/true
+   7.7  21 | Handling connection for 38049
+   8.0 TEL | Launching Web server for proxy poll
+   8.0 TEL | [26] Launching SSH port forward (socks and proxy poll): ssh -N -oServerAliveInterval=1 -oServerAliveCountMax=10 -F /dev/null -q -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -p 38049 telepresence@localhost -L127.0.0.1:34685:127.0.0.1:9050 -R9055:127.0.0.1:45613
+   8.0 TEL | END SPAN __init__.py:38(connect)    0.6s
+   8.0 TEL | BEGIN SPAN remote_env.py:65(get_remote_env)
+   8.0 TEL | [27] Capturing: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev exec web-ui-48c6652095fb485cbd6dbee14b7e16f6-7b564976d-gkxnp --container web -- python3 -c 'import json, os; print(json.dumps(dict(os.environ)))'
+   8.0  21 | Handling connection for 38049
+   8.4 TEL | END SPAN remote_env.py:65(get_remote_env)    0.4s
+   8.4 TEL | BEGIN SPAN mount.py:32(mount_remote_volumes)
+   8.4 TEL | [28] Capturing: sudo sshfs -p 38049 -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o allow_other telepresence@localhost:/ /tmp/tel-u1y_7eri/fs
+   8.5  21 | Handling connection for 38049
+   9.0 TEL | END SPAN mount.py:32(mount_remote_volumes)    0.5s
+   9.0 TEL | BEGIN SPAN vpn.py:79(get_proxy_cidrs)
+   9.0 TEL | END SPAN vpn.py:79(get_proxy_cidrs)    0.0s
+   9.0 TEL | BEGIN SPAN container.py:105(run_docker_command)
+   9.0 TEL | [29] Launching Network container: docker run --rm --privileged --name=telepresence-1551088768-1018882-27835 datawire/telepresence-local:0.93 proxy '{"port": 38049, "cidrs": ["172.168.3.0/24", "172.168.4.0/24", "172.168.2.0/24", "172.168.6.0/24", "172.168.8.0/24", "172.168.5.0/24", "10.96.0.0/12", "172.168.0.0/24", "172.168.1.0/24", "172.168.7.0/24"], "expose_ports": [[8000, 8000]]}'
+   9.0 TEL | [30] Running: docker run --network=container:telepresence-1551088768-1018882-27835 --rm datawire/telepresence-local:0.93 wait
+   9.2  30 | docker: Error response from daemon: No such container: telepresence-1551088768-1018882-27835.
+   9.3 TEL | [30] exit 125 in 0.29 secs.
+   9.5  29 | [INFO  tini (1)] Spawned child process 'python3' with pid '7'
+   9.6  29 |    0.0 TEL | Telepresence 0+unknown launched at Mon Feb 25 09:59:28 2019
+   9.6  29 |    0.0 TEL |   /usr/bin/entrypoint.py proxy '{"port": 38049, "cidrs": ["172.168.3.0/24", "172.168.4.0/24", "172.168.2.0/24", "172.168.6.0/24", "172.168.8.0/24", "172.168.5.0/24", "10.96.0.0/12", "172.168.0.0/24", "172.168.1.0/24", "172.168.7.0/24"], "expose_ports": [[8000, 8000]]}'
+   9.6  29 |    0.0 TEL | Platform: linux
+   9.6  29 |    0.0 TEL | Python 3.6.5 (default, Aug 22 2018, 14:30:18)
+   9.6  29 |    0.0 TEL | [GCC 6.3.0]
+   9.6  29 |    0.0 TEL | [1] Running: uname -a
+   9.6  29 |    0.0   1 | Linux 0b1a804a9cc6 4.15.0-20-generic #21-Ubuntu SMP Tue Apr 24 06:16:15 UTC 2018 x86_64 Linux
+   9.6  29 |    0.0 TEL | [2] Launching SSH port forward (exposed ports): ssh -N -oServerAliveInterval=1 -oServerAliveCountMax=10 -F /dev/null -q -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -p 38049 telepresence@172.17.0.1 -R '*:8000:127.0.0.1:8000'
+   9.6  29 |    0.0 TEL | Everything launched. Waiting to exit...
+   9.6  21 | Handling connection for 38049
+   9.6  29 |    0.0 TEL | BEGIN SPAN __init__.py:530(wait_for_exit)
+   9.8  29 | Starting sshuttle proxy.
+   9.9  29 | firewall manager: Starting firewall with Python version 3.6.5
+   9.9  29 | firewall manager: ready method name nat.
+   9.9  29 | IPv6 enabled: False
+   9.9  29 | UDP enabled: False
+   9.9  29 | DNS enabled: True
+   9.9  29 | TCP redirector listening on ('127.0.0.1', 12300).
+   9.9  29 | DNS listening on ('127.0.0.1', 12300).
+   9.9  29 | Starting client with Python version 3.6.5
+   9.9  29 | c : connecting to server...
+   9.9  21 | Handling connection for 38049
+  10.0  29 | Warning: Permanently added '[172.17.0.1]:38049' (ECDSA) to the list of known hosts.
+  10.3 TEL | [31] Running: docker run --network=container:telepresence-1551088768-1018882-27835 --rm datawire/telepresence-local:0.93 wait
+  10.4  29 | Starting server with Python version 3.6.5
+  10.4  29 |  s: latency control setting = True
+  10.4  29 | c : Connected.
+  10.4  29 |  s: available routes:
+  10.4  29 | firewall manager: setting up.
+  10.5  29 | >> iptables -t nat -N sshuttle-12300
+  10.5  29 | >> iptables -t nat -F sshuttle-12300
+  10.5  29 | >> iptables -t nat -I OUTPUT 1 -j sshuttle-12300
+  10.5  29 | >> iptables -t nat -I PREROUTING 1 -j sshuttle-12300
+  10.5  29 | >> iptables -t nat -A sshuttle-12300 -j RETURN --dest 127.0.0.1/32 -p tcp
+  10.5  29 | >> iptables -t nat -A sshuttle-12300 -j REDIRECT --dest 172.168.3.0/24 -p tcp --to-ports 12300 -m ttl ! --ttl 42
+  10.6  29 | >> iptables -t nat -A sshuttle-12300 -j REDIRECT --dest 172.168.4.0/24 -p tcp --to-ports 12300 -m ttl ! --ttl 42
+  10.6  29 | >> iptables -t nat -A sshuttle-12300 -j REDIRECT --dest 172.168.2.0/24 -p tcp --to-ports 12300 -m ttl ! --ttl 42
+  10.6  29 | >> iptables -t nat -A sshuttle-12300 -j REDIRECT --dest 172.168.6.0/24 -p tcp --to-ports 12300 -m ttl ! --ttl 42
+  10.7  29 | >> iptables -t nat -A sshuttle-12300 -j REDIRECT --dest 172.168.8.0/24 -p tcp --to-ports 12300 -m ttl ! --ttl 42
+  10.7  29 | >> iptables -t nat -A sshuttle-12300 -j REDIRECT --dest 172.168.5.0/24 -p tcp --to-ports 12300 -m ttl ! --ttl 42
+  10.7  29 | >> iptables -t nat -A sshuttle-12300 -j REDIRECT --dest 172.168.0.0/24 -p tcp --to-ports 12300 -m ttl ! --ttl 42
+  10.7  29 | >> iptables -t nat -A sshuttle-12300 -j REDIRECT --dest 172.168.1.0/24 -p tcp --to-ports 12300 -m ttl ! --ttl 42
+  10.7  29 | >> iptables -t nat -A sshuttle-12300 -j REDIRECT --dest 172.168.7.0/24 -p tcp --to-ports 12300 -m ttl ! --ttl 42
+  10.7  29 | >> iptables -t nat -A sshuttle-12300 -j REDIRECT --dest 10.96.0.0/12 -p tcp --to-ports 12300 -m ttl ! --ttl 42
+  10.7  29 | >> iptables -t nat -A sshuttle-12300 -j REDIRECT --dest 8.8.8.8/32 -p udp --dport 53 --to-ports 12300 -m ttl ! --ttl 42
+  10.7  29 | >> iptables -t nat -A sshuttle-12300 -j REDIRECT --dest 8.8.4.4/32 -p udp --dport 53 --to-ports 12300 -m ttl ! --ttl 42
+  10.7  31 | [INFO  tini (1)] Spawned child process 'python3' with pid '7'
+  10.7  29 | >> iptables -t nat -A sshuttle-12300 -j REDIRECT --dest 224.0.0.252/32 -p udp --dport 5355 --to-ports 12300 -m ttl ! --ttl 42
+  10.7  29 | conntrack v1.4.4 (conntrack-tools): 0 flow entries have been deleted.
+  10.8  29 | c : DNS request from ('172.17.0.2', 36533) to None: 47 bytes
+  10.8  29 | c : DNS request from ('172.17.0.2', 1024) to None: 47 bytes
+  10.8  20 | 2019-02-25T09:59:29+0000 [stdout#info] Set DNS suffix we filter out to: [(b'localdomain',)]
+  10.8  20 | 2019-02-25T09:59:29+0000 [stdout#info] Result for b'hellotelepresence.localdomain' is ['127.0.0.1']
+  10.8  20 | 2019-02-25T09:59:29+0000 [stdout#info] Result for b'hellotelepresence.localdomain' is ['127.0.0.1']
+  11.9  31 | [INFO  tini (1)] Main child exited normally (with status '100')
+  12.1 TEL | [31] exit 100 in 1.80 secs.
+  12.1 TEL | [32] Capturing: docker run --help
+  12.2 TEL | END SPAN container.py:105(run_docker_command)    3.3s
+  12.2 TEL | Everything launched. Waiting to exit...
+  12.2 TEL | BEGIN SPAN __init__.py:536(wait_for_exit)
+  12.6  29 | c : DNS request from ('172.17.0.2', 58250) to None: 41 bytes
+  12.6  20 | 2019-02-25T09:59:31+0000 [stdout#info] Updated query of type 1 from b'web-adapter.localdomain' to b'web-adapter'
+  12.6  20 | 2019-02-25T09:59:31+0000 [stdout#info] A query: b'web-adapter'
+  12.6  29 | c : DNS request from ('172.17.0.2', 37469) to None: 39 bytes
+  12.6  20 | 2019-02-25T09:59:31+0000 [stdout#info] Result for b'web-adapter.localdomain' is ['10.98.79.13']
+  12.7  20 | 2019-02-25T09:59:31+0000 [stdout#info] Updated query of type 1 from b'economist.localdomain' to b'economist'
+  12.7  20 | 2019-02-25T09:59:31+0000 [stdout#info] A query: b'economist'
+  12.7  20 | 2019-02-25T09:59:31+0000 [stdout#info] Result for b'economist.localdomain' is ['10.104.188.179']
+  26.2  29 | c : Accept TCP: 172.17.0.2:60398 -> 10.98.79.13:80.
+  26.3  29 | c : Accept TCP: 172.17.0.2:60400 -> 10.98.79.13:80.
+  30.4 TEL | [33] Running: sudo -n echo -n
+  36.9 TEL | (proxy checking local liveness)
+  37.0  20 | 2019-02-25T09:59:56+0000 [Poll#info] Checkpoint
+  37.7  29 | c : Accept TCP: 172.17.0.2:60496 -> 10.104.188.179:80.
+  40.9  29 | c : Accept TCP: 172.17.0.2:60498 -> 10.104.188.179:80.
+  41.1  29 | c : SW'unknown':Mux#5: deleting (7 remain)
+  41.1  29 | c : SW#-1:172.17.0.2:60398: deleting (6 remain)
+  41.1  29 | c : SW'unknown':Mux#6: deleting (5 remain)
+  41.1  29 | c : SW#-1:172.17.0.2:60400: deleting (4 remain)
+  41.1  29 | c : SW'unknown':Mux#7: deleting (3 remain)
+  41.1  29 | c : SW#-1:172.17.0.2:60496: deleting (2 remain)
+  50.4 TEL | Main process (docker run --name=telepresence-1551088771-201309-27835 --network=container:telepresence-1551088768-1018882-27835 -e=TELEPRESENCE_POD -e=TELEPRESENCE_CONTAINER -e=WEB_ADAPTER_BACKEND_HOST -e=TELEPRESENCE_CONTAINER_NAMESPACE -e=MONITOR_GRAPHITE_PORT_2003_TCP -e=FORMALIN_PORT_80_TCP_PORT -e=EINBOT_PORT_80_TCP_ADDR -e=MONITOR_GRAPHITE_PORT_8888_TCP_PORT -e=EINBOT_SERVICE_PORT -e=ACTUARY_PORT_80_TCP_PROTO -e=FORMALIN_PORT_80_TCP_ADDR -e=EIN_BRAIN_P1_PORT_80_TCP_PORT -e=ECONOMIST_PORT_80_TCP -e=ACTUARY_SERVICE_PORT -e=ADMIN_UI_PORT_80_TCP_ADDR -e=SENTRY_SERVICE_HOST -e=MONITOR_GRAFANA_SERVICE_PORT_GRAFANA -e=HEIMDALL_PORT_80_TCP_ADDR -e=MONITOR_STATSD_PORT_8126_TCP_PORT -e=MONITOR_STATSD_PORT_8125_UDP_PROTO -e=ACTUARY_PORT_80_TCP -e=TRANSISTOR_SERVICE_HOST -e=EIN_BRAIN_P1_DEV_PORT_80_TCP -e=OVERLORD_SERVICE_HOST -e=ADMIN_UI_PORT_80_TCP_PROTO -e=ECONOMIST_UI_PORT_80_TCP_PORT -e=EINBOT_PORT_80_TCP_PROTO -e=KIBANA_SERVICE_HOST -e=WEB_ADAPTER_PORT_80_TCP_ADDR -e=WEB_UI_PORT_80_TCP -e=NSQADMIN_SERVICE_HOST -e=MONITOR_STATSD_PORT_8125_UDP_PORT -e=WEB_ADAPTER_SERVICE_HOST -e=FORMALIN_PORT -e=EIN_BRAIN_P1_PORT -e=EINBOT_SERVICE_HOST -e=MINIO_EXTERNAL_PORT_80_TCP_PROTO -e=SPIRIT_LODGE_PORT -e=FORMALIN_PORT_80_TCP_PROTO -e=TRANSISTOR_PORT_80_TCP_ADDR -e=EIN_BRAIN_P1_DEV_SERVICE_PORT -e=OVERLORD_PORT_80_TCP_PORT -e=WEB_UI_PORT_80_TCP_ADDR -e=MONITOR_STATSD_SERVICE_PORT_TCP -e=ECONOMIST_SERVICE_HOST -e=MONITOR_GRAFANA_SERVICE_PORT -e=WEB_UI_SERVICE_HOST -e=NSQADMIN_PORT_80_TCP -e=MONITOR_GRAFANA_PORT_3000_TCP_PORT -e=MONITOR_STATSD_PORT_8126_TCP_PROTO -e=SPIRIT_LODGE_PORT_80_TCP_PORT -e=TRANSISTOR_PORT_80_TCP_PORT -e=EIN_BRAIN_P1_SERVICE_HOST -e=OVERLORD_PORT_80_TCP_PROTO -e=ECONOMIST_UI_PORT -e=SENTRY_PORT_80_TCP_PORT -e=MONITOR_STATSD_PORT_8125_UDP -e=ACTUARY_SERVICE_HOST -e=EINBOT_PORT_80_TCP -e=OVERLORD_PORT_80_TCP_ADDR -e=KIBANA_SERVICE_PORT -e=KUBERNETES_PORT_443_TCP_PORT -e=ADMIN_UI_PORT_80_TCP -e=SENTRY_PORT_80_TCP_PROTO -e=TRANSISTOR_SERVICE_PORT -e=NSQADMIN_SERVICE_PORT -e=KUBERNETES_PORT_443_TCP -e=KUBERNETES_PORT -e=OVERLORD_PORT_80_TCP -e=KIBANA_PORT -e=SPIRIT_LODGE_PORT_80_TCP -e=MONITOR_STATSD_PORT -e=SENTRY_SERVICE_PORT -e=SENTRY_PORT_80_TCP_ADDR -e=EIN_BRAIN_P1_DEV_PORT_80_TCP_PORT -e=MINIO_EXTERNAL_PORT_80_TCP_PORT -e=MONITOR_GRAPHITE_PORT_2003_TCP_ADDR -e=MONITOR_STATSD_PORT_8126_TCP -e=ACTUARY_PORT_80_TCP_ADDR -e=FORMALIN_SERVICE_PORT -e=NSQADMIN_PORT_80_TCP_PORT -e=MONITOR_GRAFANA_PORT_3000_TCP_ADDR -e=OVERLORD_PORT -e=MONITOR_GRAPHITE_SERVICE_PORT_CARBON -e=MONITOR_GRAPHITE_PORT_2003_TCP_PROTO -e=HEIMDALL_SERVICE_PORT -e=ACTUARY_PORT -e=EIN_BRAIN_P1_DEV_SERVICE_HOST -e=MINIO_EXTERNAL_SERVICE_PORT -e=EINBOT_PORT -e=ADMIN_UI_SERVICE_PORT -e=MONITOR_GRAPHITE_PORT_8888_TCP -e=MONITOR_STATSD_PORT_8126_TCP_ADDR -e=WEB_ADAPTER_PORT_80_TCP -e=ADMIN_UI_SERVICE_HOST -e=ECONOMIST_UI_SERVICE_HOST -e=ECONOMIST_SERVICE_PORT -e=WEB_UI_PORT_80_TCP_PROTO -e=MONITOR_GRAPHITE_PORT -e=SPIRIT_LODGE_PORT_80_TCP_PROTO -e=ECONOMIST_UI_PORT_80_TCP_ADDR -e=MINIO_EXTERNAL_SERVICE_HOST -e=NSQADMIN_PORT_80_TCP_ADDR -e=MONITOR_GRAPHITE_PORT_8888_TCP_ADDR -e=KIBANA_PORT_80_TCP_PROTO -e=MONITOR_STATSD_SERVICE_HOST -e=MONITOR_STATSD_SERVICE_PORT -e=MONITOR_STATSD_PORT_8125_UDP_ADDR -e=SPIRIT_LODGE_SERVICE_HOST -e=EIN_BRAIN_P1_PORT_80_TCP_ADDR -e=EIN_BRAIN_P1_DEV_PORT -e=MINIO_EXTERNAL_PORT_80_TCP_ADDR -e=SENTRY_PORT_80_TCP -e=MONITOR_GRAPHITE_PORT_8888_TCP_PROTO -e=ECONOMIST_PORT_80_TCP_PORT -e=EIN_BRAIN_P1_DEV_PORT_80_TCP_ADDR -e=WEB_UI_PORT_80_TCP_PORT -e=WEB_UI_SERVICE_PORT -e=KIBANA_PORT_80_TCP -e=FORMALIN_SERVICE_HOST -e=FORMALIN_PORT_80_TCP -e=ECONOMIST_PORT_80_TCP_PROTO -e=MONITOR_GRAPHITE_SERVICE_PORT -e=HEIMDALL_PORT -e=SPIRIT_LODGE_SERVICE_PORT -e=KUBERNETES_SERVICE_PORT_HTTPS -e=ECONOMIST_PORT_80_TCP_ADDR -e=MINIO_EXTERNAL_PORT_80_TCP -e=NSQADMIN_PORT -e=ACTUARY_PORT_80_TCP_PORT -e=MINIO_EXTERNAL_PORT -e=MONITOR_GRAPHITE_SERVICE_PORT_GRAPHITE_API -e=KUBERNETES_SERVICE_PORT -e=EIN_BRAIN_P1_SERVICE_PORT -e=EIN_BRAIN_P1_PORT_80_TCP_PROTO -e=MONITOR_GRAPHITE_PORT_2003_TCP_PORT -e=TRANSISTOR_PORT_80_TCP_PROTO -e=MONITOR_GRAFANA_SERVICE_HOST -e=KUBERNETES_PORT_443_TCP_ADDR -e=WEB_ADAPTER_SERVICE_PORT -e=KUBERNETES_SERVICE_HOST -e=OVERLORD_SERVICE_PORT -e=NSQADMIN_PORT_80_TCP_PROTO -e=MONITOR_STATSD_SERVICE_PORT_UDP -e=EINBOT_PORT_80_TCP_PORT -e=SPIRIT_LODGE_PORT_80_TCP_ADDR -e=ECONOMIST_UI_SERVICE_PORT -e=KIBANA_PORT_80_TCP_PORT -e=WEB_ADAPTER_PORT -e=WEB_ADAPTER_PORT_80_TCP_PROTO -e=ECONOMIST_UI_PORT_80_TCP -e=ECONOMIST_UI_PORT_80_TCP_PROTO -e=ECONOMIST_PORT -e=MONITOR_GRAFANA_PORT_3000_TCP -e=HEIMDALL_SERVICE_HOST -e=SENTRY_PORT -e=EIN_BRAIN_P1_DEV_PORT_80_TCP_PROTO -e=MONITOR_GRAFANA_PORT -e=MONITOR_GRAPHITE_SERVICE_HOST -e=HEIMDALL_PORT_80_TCP_PROTO -e=ADMIN_UI_PORT -e=TRANSISTOR_PORT -e=TRANSISTOR_PORT_80_TCP -e=MONITOR_GRAFANA_PORT_3000_TCP_PROTO -e=HEIMDALL_PORT_80_TCP_PORT -e=KIBANA_PORT_80_TCP_ADDR -e=WEB_ADAPTER_PORT_80_TCP_PORT -e=KUBERNETES_PORT_443_TCP_PROTO -e=ADMIN_UI_PORT_80_TCP_PORT -e=EIN_BRAIN_P1_PORT_80_TCP -e=WEB_UI_PORT -e=HEIMDALL_PORT_80_TCP -e=TELEPRESENCE_ROOT -e=TELEPRESENCE_METHOD --volume=/tmp/tel-u1y_7eri/fs:/tmp/tel-u1y_7eri/fs --init --rm -it -v /home/xvan/workspace/ein_ui/hangxin-web-ui5:/lain/app -e WEB_SUGGEST_BACKEND_HOST=economist web-ui:base ./deploy/run.sh)
+  50.4 TEL |  exited with code 0.
+  50.4 TEL | END SPAN __init__.py:536(wait_for_exit)   38.2s
+  50.4 TEL | Success. Starting cleanup.
+  50.4 >>> | Exit cleanup in progress
+  50.4 TEL | (Cleanup) Terminate local container
+  50.4 TEL | Shutting down containers...
+  50.4 TEL | (Cleanup) Unmount remote filesystem
+  50.4 TEL | [34] Running: sudo fusermount -z -u /tmp/tel-u1y_7eri/fs
+  50.4 TEL | (Cleanup) Re-scale original deployment
+  50.4 TEL | [35] Running: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev scale deployment web-ui --replicas=0
+  50.6  35 | deployment.extensions/web-ui scaled
+  50.6 TEL | (Cleanup) Delete new deployment
+  50.6 TEL | [36] Running: kubectl --context kubernetes-admin@kubernetes --namespace ein-dev delete deployment web-ui-48c6652095fb485cbd6dbee14b7e16f6
+  50.9  36 | deployment.extensions "web-ui-48c6652095fb485cbd6dbee14b7e16f6" deleted
+  50.9 TEL | (Cleanup) Kill background items
+  50.9 TEL | Killing BackgroundProcess [29] Network container
+  50.9 TEL | [37] Running: docker stop --time=1 telepresence-1551088768-1018882-27835
+  51.0  29 | [INFO  tini (1)] Main child exited with signal (with signal 'Terminated')
+  51.4  37 | telepresence-1551088768-1018882-27835
+  51.4 TEL | Killing BackgroundProcess [26] SSH port forward (socks and proxy poll)
+  51.4 TEL | [29] exit 143
+  51.4 TEL | [26] exit 0
+  51.4 TEL | Killing BackgroundThread Web server for proxy poll
+  51.5 TEL | Killing BackgroundProcess [23] socat for docker
+  51.5 TEL | [23] exit 143
+  51.5 TEL | Killing BackgroundProcess [21] kubectl port-forward
+  51.5 TEL | [21] exit -15
+  51.5 TEL | Killing BackgroundProcess [20] kubectl logs
+  51.5 TEL | [20] exit -15
+  51.5 TEL | Killing BackgroundThread sudo privileges holder
+  52.4 TEL | (sudo privileges holder thread exiting)
+  52.4 TEL | (Cleanup) Stop time tracking
+  52.4 TEL | END SPAN main.py:41(main)   52.4s
+  52.4 TEL | SPAN SUMMARY:
+  52.4 TEL |   52.4s main.py:41(main)
+  52.4 TEL |    0.3s   startup.py:58(__init__)
+  52.4 TEL |    0.1s     2 kubectl version --short
+  52.4 TEL |    0.1s     3 kubectl config current-context
+  52.4 TEL |    0.1s     4 kubectl config view -o json
+  52.4 TEL |    0.1s     5 kubectl get ns ein-dev
+  52.4 TEL |    0.0s   6 ssh -V
+  52.4 TEL |    0.0s   7 sudo -n echo -n
+  52.4 TEL |    0.1s   8 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pods tel
+  52.4 TEL |    1.0s   deployment.py:120(supplant_deployment)
+  52.4 TEL |    0.2s     remote.py:73(get_deployment_json)
+  52.4 TEL |    0.2s       9 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get deployme
+  52.4 TEL |    0.1s     10 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev delete depl
+  52.4 TEL |    0.2s     11 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev apply -f -
+  52.4 TEL |    0.4s     12 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev scale deplo
+  52.4 TEL |    2.4s   remote.py:149(get_remote_info)
+  52.4 TEL |    0.1s     remote.py:73(get_deployment_json)
+  52.4 TEL |    0.1s       13 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get deploym
+  52.4 TEL |    0.2s     14 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pod -o
+  52.4 TEL |    2.0s     remote.py:111(wait_for_pod)
+  52.4 TEL |    0.2s       15 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pod web
+  52.4 TEL |    0.2s       16 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pod web
+  52.4 TEL |    0.1s       17 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pod web
+  52.4 TEL |    0.1s       18 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pod web
+  52.4 TEL |    0.1s       19 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev get pod web
+  52.4 TEL |    0.6s   __init__.py:38(connect)
+  52.4 TEL |    0.0s     22 ip addr show dev docker0
+  52.4 TEL |    0.0s     24 ssh -F /dev/null -q -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null
+  52.4 TEL |    0.3s     25 ssh -F /dev/null -q -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null
+  52.4 TEL |    0.4s   remote_env.py:65(get_remote_env)
+  52.4 TEL |    0.4s     27 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev exec web-ui
+  52.4 TEL |    0.5s   mount.py:32(mount_remote_volumes)
+  52.4 TEL |    0.5s     28 sudo sshfs -p 38049 -F /dev/null -o StrictHostKeyChecking=no -o UserKnownHost
+  52.4 TEL |    0.0s   vpn.py:79(get_proxy_cidrs)
+  52.4 TEL |    3.3s   container.py:105(run_docker_command)
+  52.4 TEL |    0.3s     30 docker run --network=container:telepresence-1551088768-1018882-27835 --rm dat
+  52.4 TEL |    1.8s     31 docker run --network=container:telepresence-1551088768-1018882-27835 --rm dat
+  52.4 TEL |    0.1s     32 docker run --help
+  52.4 TEL |   38.2s   __init__.py:536(wait_for_exit)
+  52.4 TEL |    0.0s     33 sudo -n echo -n
+  52.4 TEL |    0.0s   34 sudo fusermount -z -u /tmp/tel-u1y_7eri/fs
+  52.4 TEL |    0.2s   35 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev scale deplo
+  52.4 TEL |    0.3s   36 kubectl --context kubernetes-admin@kubernetes --namespace ein-dev delete depl
+  52.4 TEL |    0.4s   37 docker stop --time=1 telepresence-1551088768-1018882-27835
+  52.4 TEL | (Cleanup) Remove temporary directory
+  52.4 TEL | (Cleanup) Save caches

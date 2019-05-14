@@ -1,0 +1,45 @@
+$font-families = {
+  song: SimSun,
+  kai: KaiTi,
+  yahei: 'Microsoft YaHei',
+  black: SimHei,
+  lishu: LiSu,
+  arial: Arial,
+  arial-black: 'Arial Black',
+  comic-sans: 'Comic Sans MS',
+  times: 'Times New Roman'
+}
+
+for num in (10 .. 36)
+  .rich-font-size-{num}
+    font-size abs((num / 16)) em
+
+for name, ff in $font-families
+  .rich-font-family-{name}
+    font-family ff
+
+.rich-font-large
+  font-size 1.5em
+
+.rich-font-small
+  font-size 0.7em
+
+.ordered-list-item-lower-roman
+  list-style-type lower-roman
+
+.ordered-list-item-lower-latin
+  list-style-type lower-latin
+
+.ordered-list-item-upper-latin
+  list-style-type lower-latin
+
+.rich-attachment
+  &:before
+    content ''
+    display inline-block
+    margin-right 0.2rem
+    width 1rem
+    height 1rem
+    background-image url('../assets/attachment.svg')
+    background-repeat no-repeat
+    background-size 100%
